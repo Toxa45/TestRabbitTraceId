@@ -16,7 +16,7 @@ spring:
       binders:
         rabbit:
           type: rabbit
-          enviroment:
+          environment:
             spring:
               rabbitmq:
                 password: guest
