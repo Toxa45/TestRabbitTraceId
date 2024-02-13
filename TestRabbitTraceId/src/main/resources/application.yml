@@ -1,0 +1,36 @@
+spring:
+  cloud:
+    function:
+      definition: testListener
+    stream:
+      output-bindings: test
+      bindings:
+        test-out-0:
+          binder: rabbit
+          destination: test
+          group: test
+        testListener-in-0:
+          binder: rabbit
+          destination: test
+          group: test
+      binders:
+        rabbit:
+          type: rabbit
+          enviroment:
+            spring:
+              rabbitmq:
+                password: guest
+                username: guest
+                port: 5672
+                virtual-host: /
+                deliveryMode: 2
+                host: localhost
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+
+management:
+  tracing:
+    sampling:
+      probability: 1
+
